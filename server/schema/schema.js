@@ -118,10 +118,100 @@ const RootQuery = new GraphQLObjectType({
             resolve(parent, args) {
                 return _lodash.find(postsData, { id: args.id })
             }
+        },
+        users:{
+            type : new GraphQLList(UserType),
+            resolve(parent, args){
+                return usersData;
+            }
+        },
+        hobbies:{
+            type: new GraphQLList(HobbyType),
+            resolve(parent, args) {
+                return hobbiesData;
+            }
         }
     }
 });
 
+const mutation = new GraphQLObjectType({
+    name: 'mutation',
+    fields:{
+        createUser:{
+            type: UserType,
+            args: {
+                //
+                name: {
+                    type: GraphQLString
+                },
+                age: {
+                    type: GraphQLInt
+                },
+                profession: {
+                    type: GraphQLString
+                }
+            },
+            resolve( parent, args){
+                let user = {
+                    name: args.name,
+                    age: args.age,
+                    profession: args.profession
+                }
+                return user;
+            }
+
+        },
+        createPost: {
+            type: postType,
+            args: {
+                //
+                comment: {
+                    type: GraphQLString
+                },
+                userId: {
+                    type: GraphQLString
+                }
+            },
+            resolve(parent, args) {
+                let post = {
+                    comment: args.comment,
+                    userId: args.userId
+                   
+                }
+                return post;
+            }
+
+        },
+      //  id: '1000', title: 'Programming', description: 'Using computers to make the world a better place', userId
+        createHobbies: {
+            type: HobbyType,
+            args: {
+                //
+                title: {
+                    type: GraphQLString
+                },
+                description: {
+                    type: GraphQLString
+                },
+                userId: {
+                    type: GraphQLString
+                }
+            },
+            resolve(parent, args) {
+                let hobbies = {
+                    title: args.title,
+                    userId: args.userId,
+                    description: args.description
+
+                }
+                return hobbies;
+            }
+
+        }
+    }
+})
+
 module.exports = new GraphQLSchema({
-    query: RootQuery
+    query: RootQuery,
+    mutation: mutation
 })
