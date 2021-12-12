@@ -1,0 +1,17 @@
+{
+  "name": "graph-ql-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nasruddin khan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^16.1.0",
+    "lodash": "^4.17.21"
+  }
+}
